@@ -70,7 +70,7 @@ class Application extends SingleCommandApplication
         );
 
         Browser::$coolDown = $input->getOption('slow');
-        Browser::$maxCoolDown = $input->getOption('max-wait');
+        Browser::$maxCoolDown = (int) trim($input->getOption('max-wait'));
 
         return $this->scrapeCategory(
             $this->setCategoryOption()
