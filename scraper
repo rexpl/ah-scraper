@@ -1,0 +1,12 @@
+#!/usr/bin/env php
+<?php
+
+declare(strict_types=1);
+
+use Rexpl\Scraper\Application;
+
+require 'vendor/autoload.php';
+
+Application::$path = __DIR__;
+
+(new Application())->run();

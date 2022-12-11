@@ -1,0 +1,19 @@
+{
+    "name": "rexpl/ah-scraper",
+    "require": {
+        "symfony/browser-kit": "^6.2",
+        "symfony/http-client": "^6.2",
+        "symfony/console": "^6.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Rexpl\\Scraper\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "rexpl",
+            "email": "75545403+rexpl@users.noreply.github.com"
+        }
+    ]
+}
