@@ -49,7 +49,8 @@ class Application extends SingleCommandApplication
         $this->setName('scraper')
             ->setDescription('Start scraping https://www.ah.nl')
             ->addOption('slow', 's', InputOption::VALUE_NONE, 'Scrape slowly (random interval between requests 3-30 sec)')
-            ->addOption('max-wait', null, InputOption::VALUE_OPTIONAL, 'Maximum to wait time between requests (sec)', 30)
+            ->addOption('max-wait', null, InputOption::VALUE_OPTIONAL, 'Maximum time to wait between requests (sec)', '30')
+            ->addOption('min-wait', null, InputOption::VALUE_OPTIONAL, 'Minimum time to wait between requests (sec)', '3')
             ->addArgument('file', InputArgument::OPTIONAL, 'Path to csv file (default: result.csv)', 'result.csv');
     }
 
@@ -70,6 +71,7 @@ class Application extends SingleCommandApplication
         );
 
         Browser::$coolDown = $input->getOption('slow');
+        Browser::$minCoolDown = (int) trim($input->getOption('min-wait'));
         Browser::$maxCoolDown = (int) trim($input->getOption('max-wait'));
 
         return $this->scrapeCategory(

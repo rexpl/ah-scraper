@@ -21,6 +21,14 @@ class Browser
 
 
     /**
+     * Minimum cool down time.
+     *
+     * @var int
+     */
+    public static int $minCoolDown = 1;
+
+
+    /**
      * Maximum cool down time.
      *
      * @var int
@@ -86,7 +94,7 @@ class Browser
     {
         if (static::$coolDown) {
 
-            $this->waitTime = time() + rand(3, static::$maxCoolDown);
+            $this->waitTime = time() + rand(static::$minCoolDown, static::$maxCoolDown);
         }
 
         return $this->symfonyBrowser->request('GET', $path);
