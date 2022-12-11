@@ -78,13 +78,16 @@ class AhScraper
     {
         $browser = $this->browsers[0] ?? $this->makeNewBrowser();
 
-        if (!$browser->isAvailable()) {
+        while (true) {
 
-            sleep(5);
-            return $this->provideBrowser();
+            if (!$browser->isAvailable()) {
+
+                sleep(Browser::$minCoolDown);
+                continue;
+            }
+    
+            return $browser;
         }
-
-        return $browser;
 
         /**
          * Browser rotation, not working
