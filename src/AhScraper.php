@@ -120,7 +120,7 @@ class AhScraper
      */
     protected function makeNewBrowser(): Browser
     {
-        $newBrowser = new Browser(count($this->browsers));
+        $newBrowser = new Browser(rand(0,2));
 
         // tmp key 0 to have only one browser.
         $this->browsers[0] = $newBrowser;

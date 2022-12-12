@@ -12,7 +12,7 @@ class HttpClients
      * @var array<array<string,string>>
      */
     public const USER_AGENTS = [
-        [
+        0 => [
             'Accept-Language' => 'en,nl',
             'Cache-Control' => 'max-age=0',
             'Sec-Fetch-Dest' => 'document',
@@ -24,7 +24,7 @@ class HttpClients
             'sec-ch-ua-mobile' => '?0',
             'sec-ch-ua-platform' => '"windows"',
         ],
-        [
+        1 => [
             'Accept-Language' => 'en-US,en;q=0.9',
             'Cache-Control' => 'max-age=0',
             'Sec-Fetch-Dest' => 'document',
@@ -36,7 +36,7 @@ class HttpClients
             'sec-ch-ua-mobile' => '?0',
             'sec-ch-ua-platform' => '"windows"',
         ],
-        [
+        2 => [
             'User-Agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0',
             'Accept-Language' => 'en-US,en;q=0.5',
             'Accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8',
