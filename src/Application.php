@@ -66,8 +66,12 @@ class Application extends SingleCommandApplication
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $this->terminal = new SymfonyStyle($input, $output);
+
+        $csv = $this->gotCsvFile($input);
+        if (null === $csv) return static::SUCCESS;
+
         $this->scraper = new AhScraper(
-            static::$path.'/xpath_config.php', [$this->gotCsvFile($input)]
+            static::$path.'/xpath_config.php', [$csv]
         );
 
         Browser::$coolDown = $input->getOption('slow');
@@ -85,9 +89,9 @@ class Application extends SingleCommandApplication
      * 
      * @param InputInterface $input
      * 
-     * @return CsvCollector
+     * @return CsvCollector|null
      */
-    protected function gotCsvFile(InputInterface $input): CsvCollector
+    protected function gotCsvFile(InputInterface $input): ?CsvCollector
     {
         if ('result.csv' === $input->getArgument('file')) {
 
@@ -100,7 +104,7 @@ class Application extends SingleCommandApplication
                 'File %s already exists, content will be overwritten.', $input->getArgument('file')
             ));
 
-            $this->terminal->confirm('Do you wish to continue ?');
+            if (!$this->terminal->confirm('Do you wish to continue ?')) return null;
         }
 
         return new CsvCollector($input->getArgument('file'));
