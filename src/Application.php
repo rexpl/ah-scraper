@@ -287,10 +287,10 @@ class Application extends SingleCommandApplication
             $product->promotion = 'Price drop: ' . $promo;
         }
 
-        if ($this->scraper->isSecondFree($crawler)) {
+        if ($potentialPromotion = $this->scraper->productHasTextualPromotion($crawler)) {
             
             $product->isPromotion = true;
-            $product->promotion = '2nd is free';
+            $product->promotion = $potentialPromotion === 1 ? '2nd is free' : '2nd is discounted 50%';
         }
 
         $product->brand = $this->scraper->productBrand($crawler);

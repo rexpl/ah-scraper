@@ -234,15 +234,22 @@ class AhScraper
     /**
      * Is second product free.
      * 
+     * This method returns false fr no promotion, 1 for "2e gratis" and 2 for "2e halve prijs".
+     * 
      * @param Crawler $crawler
      * 
-     * @return bool
+     * @return false|int
      */
-    public function isSecondFree(Crawler $crawler): bool
+    public function productHasTextualPromotion(Crawler $crawler): false|int
     {
         $node = $crawler->evaluate($this->xPaths['product_second_free']);
 
-        return $node->count() > 0 && $node->text() === '2e gratis';
+        if ($node->count() <= 0) return false;
+
+        if ($node->text() === '2e gratis') return 1;
+        if ($node->text() === '2e halve prijs') return 2;
+
+        return false;
     }
 
 
