@@ -44,7 +44,7 @@ class CsvCollector implements DataCollector
         fwrite(
             $this->file, 
             sprintf(
-                '"%s","%s","%s","%s","%s","%s","%s","%s","%s"',
+                '"%s","%s","%s","%s","%s","%s","%s","%s","%s","%s"',
                 'https://www.ah.nl' . $product->url,
                 $product->name,
                 $product->available ? 'Yes' : 'No',
