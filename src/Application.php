@@ -268,14 +268,6 @@ class Application extends SingleCommandApplication
         $crawler = $this->scraper->request('https://www.ah.nl' . $product->url);
 
         $product->available = $this->scraper->isProductAvailableOnline($crawler);
-
-        if (!$product->available) {
-            
-            $this->scraper->save($product);
-            $this->terminal->progressAdvance();
-            return;
-        }
-
         $product->isNew = $this->scraper->isProductNew($crawler);
 
         [
