@@ -291,6 +291,7 @@ class Application extends SingleCommandApplication
 
         $product->brand = $this->scraper->productBrand($crawler);
         $product->imgUrl = $this->scraper->productImage($crawler);
+        $product->size = $this->scraper->productSize($crawler);
 
         $this->scraper->save($product);
         $this->terminal->progressAdvance();

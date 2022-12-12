@@ -41,6 +41,7 @@ return [
      * @var string
      */
     'product_new' => '//*[@id="start-of-content"]/div[1]/div/div/div/article/div/div/div[2]/div[2]/span',
+    'product_size' => '//*[@id="start-of-content"]/div[1]/div/div/div/article/div/div/div[2]/div[1]/div/text()',
 
 
     /**
@@ -61,7 +62,7 @@ return [
 
 
     /**
-     * Price if the product is new.
+     * Price if the product if it is new.
      * 
      * @var string
      */

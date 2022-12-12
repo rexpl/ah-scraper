@@ -15,6 +15,7 @@ class Product
      * @param bool $isPromotion
      * @param string $promotion
      * @param string $brand
+     * @param string $size
      * @param string $imgUrl
      * @param string $imgSize
      * 
@@ -29,6 +30,7 @@ class Product
         public bool $isPromotion = false,
         public string $promotion = '',
         public string $brand = '',
+        public string $size = '',
         public string $imgUrl = '',
         public string $imgSize = ''
     ) {}

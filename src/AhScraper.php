@@ -232,6 +232,19 @@ class AhScraper
 
 
     /**
+     * Get the product size.
+     * 
+     * @param Crawler $crawler
+     * 
+     * @return string
+     */
+    public function productSize(Crawler $crawler): string
+    {
+        return $crawler->evaluate($this->xPaths['product_size'])->innerText();
+    }
+
+
+    /**
      * Is second product free.
      * 
      * This method returns false fr no promotion, 1 for "2e gratis" and 2 for "2e halve prijs".

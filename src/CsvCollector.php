@@ -27,7 +27,7 @@ class CsvCollector implements DataCollector
 
         fwrite(
             $this->file,
-            '"Url","Name","Product Available Online","New","Brand","Price","In promotion","Promotion","Image url"' . "\n"
+            '"Url","Name","Product Available Online","New","Brand","Size","Price","In promotion","Promotion","Image url"' . "\n"
         );
     }
 
@@ -50,6 +50,7 @@ class CsvCollector implements DataCollector
                 $product->available ? 'Yes' : 'No',
                 $product->isNew ? 'Yes' : 'No',                
                 $product->brand,
+                $product->size,
                 $product->price,
                 $product->isPromotion ? 'Yes' : 'No',
                 $product->promotion,
