@@ -211,11 +211,6 @@ class Application extends SingleCommandApplication
         ));
         $this->terminal->progressStart($count);
 
-        $products[0] = new Product(
-            '/producten/produc/wi69558/los-cises-sherry-fino',
-            'Los Cisnes Sherry Fino'
-        );
-
         foreach ($products as $product) {
             
             try {
