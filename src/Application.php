@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Rexpl\Scraper;
 
+use Symfony\Component\Console\Cursor;
 use Symfony\Component\Console\Input\Input;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -12,6 +13,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\SingleCommandApplication;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\DomCrawler\Crawler;
+use Throwable;
 
 class Application extends SingleCommandApplication
 {  
@@ -29,6 +31,14 @@ class Application extends SingleCommandApplication
      * @var SymfonyStyle
      */
     protected SymfonyStyle $terminal;
+
+
+    /**
+     * Terminal cursor.
+     * 
+     * @var Cursor
+     */
+    protected Cursor $cursor;
 
 
     /**
@@ -66,6 +76,7 @@ class Application extends SingleCommandApplication
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $this->terminal = new SymfonyStyle($input, $output);
+        $this->cursor = new Cursor($output);
 
         $csv = $this->gotCsvFile($input);
         if (null === $csv) return static::SUCCESS;
@@ -200,7 +211,30 @@ class Application extends SingleCommandApplication
         ));
         $this->terminal->progressStart($count);
 
-        foreach ($products as $product) $this->scrapeProduct($product);
+        $products[0] = new Product(
+            '/producten/produc/wi69558/los-cises-sherry-fino',
+            'Los Cisnes Sherry Fino'
+        );
+
+        foreach ($products as $product) {
+            
+            try {
+
+                $this->scrapeProduct($product);
+
+            } catch (Throwable $th) {
+                
+                // Clean the line containing the progress bar
+                $this->cursor->moveToColumn(0);
+
+                $this->terminal->warning([
+                    'Failed to scrape: ' . $product->name,
+                    'See: https://www.ah.nl' . $product->url,
+                ]);
+                $this->terminal->progressAdvance();
+            }
+        }
+            
 
         $this->terminal->progressFinish();
 
