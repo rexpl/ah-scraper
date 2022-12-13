@@ -223,15 +223,11 @@ class Application extends SingleCommandApplication
                 $this->scrapeProduct($product);
 
             } catch (Throwable $th) {
-                
-                // Clean the line containing the progress bar
-                $this->cursor->moveToColumn(0);
 
-                $this->terminal->warning([
-                    'Failed to scrape: ' . $product->name,
-                    'See: https://www.ah.nl' . $product->url,
-                ]);
-                $this->terminal->progressAdvance();
+                // sometimes waiting fixes the issue
+                sleep(5);
+
+                $this->retryScrapePoduct($product);
             }
         }
             
@@ -329,5 +325,32 @@ class Application extends SingleCommandApplication
 
         $this->scraper->save($product);
         $this->terminal->progressAdvance();
+    }
+
+
+    /**
+     * Retry to scrape a prodct if it failed.
+     * 
+     * @param Product $product
+     * 
+     * @return void
+     */
+    protected function retryScrapePoduct(Product $product): void
+    {
+        try {
+            
+            $this->scrapeProduct($product);
+
+        } catch (Throwable $th) {
+                
+            // Clean the line containing the progress bar
+            $this->cursor->moveToColumn(0);
+
+            $this->terminal->warning([
+                'Failed to scrape: ' . $product->name,
+                'See: https://www.ah.nl' . $product->url,
+            ]);
+            $this->terminal->progressAdvance();
+        }
     }
 }
