@@ -12,7 +12,6 @@ First run:
 ```
 git clone https://github.com/rexpl/ah-scraper
 ```
-> __Info:__ private repository
 
 Once the repository cloned:
 ```
@@ -20,7 +19,7 @@ cd ./ah-scraper
 composer install
 ```
 
-### If provided a zip file:
+### If from the zip file:
 
 Unzip the file and in the project root run:
 ```
